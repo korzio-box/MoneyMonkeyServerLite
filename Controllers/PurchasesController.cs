@@ -21,6 +21,7 @@ namespace MoneyMonkeyServerLite.Controllers
             _context = context;
         }
 
+        /*
         // GET: api/Purchases
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Purchase>>> Getpurchases()
@@ -30,6 +31,45 @@ namespace MoneyMonkeyServerLite.Controllers
               return NotFound();
           }
             return await _context.purchases.ToListAsync();
+        }
+        */
+
+        // GET: api/Purchases/01/2023
+        [HttpGet("{month:int}/{year:int}")]
+        public async Task<ActionResult<List<Purchase>>> GetPurchasesByDate(int month, int year)
+        {
+            if (_context.purchases == null)
+            {
+                return NotFound();
+            }
+            List<Purchase> purchase = new List<Purchase>();
+            purchase = _context.purchases.Where(x => x.Date.Year==year && x.Date.Month==month).ToList();
+
+            if (purchase == null)
+            {
+                return NotFound();
+            }
+
+            return await Task.FromResult(purchase);
+        }
+
+        // GET: api/Purchases/yearly/2023
+        [HttpGet("yearly/{year:int}")]
+        public async Task<ActionResult<List<Purchase>>> GetPurchasesByYear(int year)
+        {
+            if (_context.purchases == null)
+            {
+                return NotFound();
+            }
+            List<Purchase> purchase = new List<Purchase>();
+            purchase = _context.purchases.Where(x => x.Date.Year == year).ToList();
+
+            if (purchase == null)
+            {
+                return NotFound();
+            }
+
+            return await Task.FromResult(purchase);
         }
 
         // GET: api/Purchases/5
