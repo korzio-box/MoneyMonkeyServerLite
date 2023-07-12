@@ -17,7 +17,7 @@ namespace MoneyMonkeyLite.Client
         static async Task<Uri> CreateCategoryAsync(Category category)
         {
             HttpResponseMessage response = await client.PostAsJsonAsync(
-                "api/categories", category);
+                "api/Categories", category);
             response.EnsureSuccessStatusCode();
 
             // return URI of the created resource.
@@ -40,7 +40,7 @@ namespace MoneyMonkeyLite.Client
         static async Task<Category> UpdateCategoryAsync(Category category)
         {
             HttpResponseMessage response = await client.PutAsJsonAsync(
-                $"api/categories/{category.Id}", category);
+                $"api/Categories/{category.Id}", category);
             response.EnsureSuccessStatusCode();
 
             // Deserialize the updated category from the response body.
@@ -52,7 +52,7 @@ namespace MoneyMonkeyLite.Client
         static async Task<HttpStatusCode> DeleteCategoryAsync(int id)
         {
             HttpResponseMessage response = await client.DeleteAsync(
-                $"api/categories/{id}");
+                $"api/Categories/{id}");
             return response.StatusCode;
         }
 
