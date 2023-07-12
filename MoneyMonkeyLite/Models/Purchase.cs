@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MoneyMonkeyLite.Models
 {
-    internal class Purchase
+    public class Purchase
     {
         public int Id { get; set; }
         public string User { get; set; }
